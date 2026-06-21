@@ -1,0 +1,71 @@
+# ============================================================
+# Netflix (NFLX) — valuation assumptions
+# ============================================================
+# This file is the only thing you edit to re-run the model with
+# different views, or to point the framework at another company
+# (copy it to e.g. config/spotify.yaml, change the ticker + numbers).
+#
+# Everything here is an ASSUMPTION (a judgement call), kept separate
+# from the ACTUALS that live in the database. Sources for actuals are
+# documented in data/seed_netflix.sql.
+# ============================================================
+
+ticker: NFLX
+company_name: Netflix, Inc.
+base_year: 2025          # last actual fiscal year (drives projections)
+projection_years: 5      # explicit forecast horizon before terminal value
+
+# --- Free cash flow method -------------------------------------------------
+# For most companies use "buildup":
+#     FCF = EBIT*(1-tax) + D&A - capex - change_in_NWC
+# For STREAMERS that's misleading: reported "capex" is tiny (PP&E only)
+# while the real investment is cash content spend, which is amortised
+# through the P&L. Adding back $16bn of content amortisation while
+# subtracting only ~$0.7bn of PP&E capex would massively overstate FCF.
+# So Netflix uses the company's own reported FCF margin, ramped over time.
+fcf_method: margin        # "margin" or "buildup"
+tax_rate: 0.21            # US statutory; actual effective rate has run lower
+
+# --- Cost of capital (CAPM / WACC) -----------------------------------------
+wacc:
+  risk_free_rate: 0.043   # ~10Y US Treasury, early 2026
+  equity_risk_premium: 0.055
+  # beta and current price are read from the market_data table in the DB
+  pre_tax_cost_of_debt: 0.050
+
+# --- Terminal value --------------------------------------------------------
+terminal_growth_rate: 0.030   # GDP-aligned; MUST be < WACC
+mid_year_convention: true     # cash flows discounted at t-0.5
+
+# --- Scenarios -------------------------------------------------------------
+# Each scenario provides, for every projection year:
+#   revenue_growth : YoY revenue growth
+#   fcf_margin     : free cash flow as % of revenue (used when fcf_method=margin)
+# plus scenario-level overrides for WACC and terminal growth.
+#
+# Base case anchors to management guidance: FY2026 revenue ~$51bn (+~13%)
+# and a 31.5% operating-margin target, with FCF margin (~21% in FY2025)
+# expanding toward the mid-20s as the ad tier scales and content
+# amortisation growth moderates.
+scenarios:
+  bear:
+    revenue_growth: [0.10, 0.09, 0.08, 0.07, 0.06]
+    fcf_margin:     [0.20, 0.21, 0.22, 0.22, 0.23]
+    wacc_override: 0.115
+    terminal_growth_override: 0.025
+  base:
+    revenue_growth: [0.13, 0.12, 0.11, 0.09, 0.08]
+    fcf_margin:     [0.21, 0.23, 0.25, 0.26, 0.27]
+    wacc_override: null     # use computed WACC
+    terminal_growth_override: null
+  bull:
+    revenue_growth: [0.17, 0.16, 0.14, 0.12, 0.11]
+    fcf_margin:     [0.23, 0.26, 0.29, 0.31, 0.33]
+    wacc_override: 0.085
+    terminal_growth_override: 0.035
+
+# --- Notes that travel with the model (shown in the summary) ---------------
+notes:
+  - "Standalone Netflix. The pending all-cash acquisition of Warner Bros. (announced Dec-2025) is NOT modelled here and would materially change debt, share count and the growth profile — treat as a separate scenario."
+  - "Peer multiples in the database are illustrative placeholders; refresh before citing comps output."
+  - "Share price in market_data is a post-split reference (10:1 split, Nov-2025) — update to the live quote before reading upside/downside."

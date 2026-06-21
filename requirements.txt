@@ -1,0 +1,14 @@
+# Core analytical stack
+pandas>=2.0
+numpy>=1.24
+PyYAML>=6.0
+
+# Excel model export (Phase 2)
+openpyxl>=3.1
+
+# Interactive dashboard (Phase 3)
+plotly>=5.18
+streamlit>=1.30
+
+# Notebook walkthrough
+jupyter>=1.0
