@@ -10,7 +10,7 @@ This repo is built to show the full analyst toolkit in one place rather than a s
 | **Valuation engine** (`src/`) | Config-driven DCF, CAPM WACC, and comparable-company analysis in clean, documented Python | Financial modelling & Python | Finance / Equity Research / FP&A |
 | **Scenario & assumptions** (`config/`) | Bear/Base/Bull, FCF method, cost-of-capital inputs — separated from the actuals | Structured analytical thinking | All analyst roles |
 | **Excel model** (`build_excel_model.py` → `outputs/`) | The same DCF as an auditable, formula-driven workbook with scenarios and sensitivity tables | Excel / IB-standard modelling | Finance / IB |
-| **Dashboard** (Phase 3) | Interactive view of financials, peers and valuation sensitivity | Data visualisation | Analyst / BA |
+| **Dashboard** (`dashboard/app.py`) | Interactive Streamlit app: financial trends, KPIs, peer multiples and a live DCF sensitivity | Data visualisation | Analyst / BA |
 | **Deck + memo** (Phase 4) | The investment story for a non-technical audience | Business communication | Strategy / BA |
 
 > **Why "framework, not one stock"?** The thing that reads strongest on a portfolio is *"I built an analysis tool,"* not *"I analysed one company."* Netflix is the worked example; swapping in another company is a config + data change, not a rewrite.
@@ -34,6 +34,9 @@ python run_valuation.py config/your_company.yaml
 
 # 4. (Optional) Generate the Excel model -> outputs/NFLX_DCF_Model.xlsx
 python build_excel_model.py
+
+# 5. (Optional) Launch the interactive dashboard in your browser
+streamlit run dashboard/app.py
 ```
 
 The run prints historical financials, the WACC build, all three DCF scenarios, the comps table, and a blended valuation range. The Excel model is generated from the *same* config and database, so the workbook and the Python engine always agree.
@@ -82,6 +85,19 @@ It follows standard modelling conventions (blue inputs, black formulas, green cr
 
 ---
 
+## Interactive dashboard
+
+`dashboard/app.py` is a Streamlit app that reads the same database and reuses the same engine, so its numbers match the Python tool and the Excel model. Run it with `streamlit run dashboard/app.py`. It has four tabs:
+
+- **Valuation** — the football-field range, a live scenario projection, an enterprise-to-equity waterfall, and a WACC × terminal-growth sensitivity heatmap.
+- **Financials** — revenue/operating-income, margin trends, and operating vs free cash flow across FY2022–25.
+- **Operating KPIs** — paid memberships, operating margin and ad revenue from the database.
+- **Comparables** — peer trading multiples with Netflix highlighted, and implied value per share.
+
+The sidebar sliders (scenario, WACC, terminal growth, growth/margin shifts) re-run the DCF live. **Deploy a live link for free:** push this repo to GitHub, then at [share.streamlit.io](https://share.streamlit.io) connect the repo and set the main file to `dashboard/app.py` — you'll get a public URL you can put on your CV.
+
+---
+
 ## Repository structure
 
 ```
@@ -90,6 +106,8 @@ equity-valuation-framework/
 ├── requirements.txt
 ├── run_valuation.py            # entry point
 ├── build_excel_model.py        # generates the Excel model from the same config + DB
+├── dashboard/
+│   └── app.py                  # interactive Streamlit dashboard (same engine + DB)
 ├── config/
 │   └── netflix.yaml            # assumptions + Bear/Base/Bull scenarios (edit me)
 ├── data/
@@ -116,7 +134,7 @@ equity-valuation-framework/
 
 ## Roadmap
 
-**Phases 1–2 are built**: the analytical core (Python + SQL) and the auditable **Excel model**. See [`docs/ROADMAP.md`](docs/ROADMAP.md) for the rest of the plan: an interactive **dashboard**, and a rebuilt **pitch deck + investment memo** for the non-technical audience.
+**Phases 1–3 are built**: the analytical core (Python + SQL), the auditable **Excel model**, and the interactive **Streamlit dashboard**. See [`docs/ROADMAP.md`](docs/ROADMAP.md) for what's left: a rebuilt **pitch deck + investment memo** for the non-technical audience.
 
 ---
 

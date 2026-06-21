@@ -1,6 +1,6 @@
 # Roadmap
 
-The project is built in phases so each layer is a self-contained, demonstrable skill. Phases 1–2 are complete; the rest extend the same single source-of-truth database and config.
+The project is built in phases so each layer is a self-contained, demonstrable skill. Phases 1–3 are complete; Phase 4 extends the same single source-of-truth database and config.
 
 ## Phase 1 — Analytical core ✅ (this repo)
 - Relational SQLite schema for financials, KPIs and peers
@@ -17,9 +17,9 @@ The project is built in phases so each layer is a self-contained, demonstrable s
 - Generated from the same `config/netflix.yaml` and database as the engine, so the two reconcile exactly (Bear \$35.23 / Base \$52.35 / Bull \$115.22)
 - **Demonstrates:** Excel / investment-banking-standard modelling — still the lingua franca of finance roles
 
-## Phase 3 — Interactive dashboard
-- Read the same database into an interactive view: revenue/margin trends, KPI (subscribers, ARPU) charts, peer-multiple comparison, and a live DCF sensitivity slider
-- Built in Plotly/Streamlit (fully reproducible from the repo); a Power BI / Tableau version can be built from the same clean tables if a specific role asks for that tool
+## Phase 3 — Interactive dashboard ✅
+- `dashboard/app.py`: a Streamlit app reading the same database and reusing the same engine, with four tabs — Valuation (football field, live projection, EV→equity waterfall, WACC × terminal-growth sensitivity heatmap), Financials (revenue/margins/cash flow trends), Operating KPIs (memberships, margin, ad revenue), and Comparables (peer multiples + implied value)
+- Sidebar sliders (scenario, WACC, terminal growth, growth/margin shifts) re-run the DCF live; built with Plotly; deployable free on Streamlit Community Cloud for a live CV link
 - **Demonstrates:** data visualisation & communicating analysis interactively — core to Analyst / BA roles
 
 ## Phase 4 — Pitch deck + investment memo
