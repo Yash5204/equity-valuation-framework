@@ -1,4 +1,25 @@
-# Equity Valuation Framework — DCF + Comps, demonstrated on Netflix (NFLX)
+<div align="center">
+
+<img src="assets/banner.png" alt="Equity Valuation Framework — DCF + comparable-company analysis, demonstrated on Netflix" width="100%" />
+
+<p>
+<img alt="Python" src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white">
+<img alt="SQLite" src="https://img.shields.io/badge/SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white">
+<img alt="pandas" src="https://img.shields.io/badge/pandas-150458?style=flat-square&logo=pandas&logoColor=white">
+<img alt="Streamlit" src="https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white">
+<img alt="Plotly" src="https://img.shields.io/badge/Plotly-3F4F75?style=flat-square&logo=plotly&logoColor=white">
+<img alt="Excel" src="https://img.shields.io/badge/Excel-217346?style=flat-square&logo=microsoftexcel&logoColor=white">
+<a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square"></a>
+</p>
+
+<p>
+<b><a href="https://YOUR-APP.streamlit.app">▶ Live dashboard</a></b> &nbsp;·&nbsp;
+<a href="outputs/NFLX_Investment_Pitch.pptx">Pitch deck</a> &nbsp;·&nbsp;
+<a href="docs/INVESTMENT_MEMO.md">Investment memo</a> &nbsp;·&nbsp;
+<a href="outputs/NFLX_DCF_Model.xlsx">Excel model</a>
+</p>
+
+</div>
 
 A reusable, end-to-end equity valuation engine. Point it at any public company by editing one config file and seeding its financials; it produces a **DCF valuation** (Bear / Base / Bull), a **comparable-company analysis**, and a blended valuation range — all from a single source-of-truth database.
 
@@ -14,6 +35,23 @@ This repo is built to show the full analyst toolkit in one place rather than a s
 | **Deck + memo** (`outputs/`, `docs/`) | A 12-slide pitch deck and a 1–2 page investment memo for a non-technical audience | Business communication | Strategy / BA |
 
 > **Why "framework, not one stock"?** The thing that reads strongest on a portfolio is *"I built an analysis tool,"* not *"I analysed one company."* Netflix is the worked example; swapping in another company is a config + data change, not a rewrite.
+
+---
+
+## 📸 Preview
+
+<table>
+<tr>
+<td width="50%"><img src="assets/summary.png" alt="Investment summary"/><br/><sub><b>Investment summary</b> — valuation range vs. the market price</sub></td>
+<td width="50%"><img src="assets/football-field.png" alt="Scenario valuation range"/><br/><sub><b>DCF scenarios</b> — bear / base / bull vs. price</sub></td>
+</tr>
+<tr>
+<td width="50%"><img src="assets/financials.png" alt="Financial performance"/><br/><sub><b>Financial performance</b> — revenue, margins &amp; cash flow</sub></td>
+<td width="50%"><img src="assets/comps.png" alt="Comparable companies"/><br/><sub><b>Comparables</b> — peer multiples &amp; implied value</sub></td>
+</tr>
+</table>
+
+<sub>These are outputs of the analysis itself; the interactive versions live in the Streamlit dashboard.</sub>
 
 ---
 
@@ -96,6 +134,8 @@ It follows standard modelling conventions (blue inputs, black formulas, green cr
 
 The sidebar sliders (scenario, WACC, terminal growth, growth/margin shifts) re-run the DCF live. **Deploy a live link for free:** push this repo to GitHub, then at [share.streamlit.io](https://share.streamlit.io) connect the repo and set the main file to `dashboard/app.py` — you'll get a public URL you can put on your CV.
 
+> **Tip:** once it's deployed (or running locally), screenshot the dashboard, save it as `assets/dashboard.png`, and add `![Dashboard](assets/dashboard.png)` to the Preview section — a live-tool screenshot is the single strongest visual on the page. Then drop the public URL into the "Live dashboard" link at the top of this README and the repo's **About** sidebar.
+
 ---
 
 ## Pitch deck & investment memo
@@ -114,6 +154,7 @@ Both are built from the same figures as everything else, so the story a recruite
 ```
 equity-valuation-framework/
 ├── README.md
+├── assets/                     # banner + screenshots used in this README
 ├── requirements.txt
 ├── run_valuation.py            # entry point
 ├── build_excel_model.py        # generates the Excel model from the same config + DB
