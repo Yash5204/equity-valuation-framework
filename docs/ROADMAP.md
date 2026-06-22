@@ -1,6 +1,6 @@
 # Roadmap
 
-The project is built in phases so each layer is a self-contained, demonstrable skill. Phases 1–3 are complete; Phase 4 extends the same single source-of-truth database and config.
+The project is built in phases so each layer is a self-contained, demonstrable skill. All four phases are complete; the cross-cutting items below are optional future polish.
 
 ## Phase 1 — Analytical core ✅ (this repo)
 - Relational SQLite schema for financials, KPIs and peers
@@ -22,9 +22,10 @@ The project is built in phases so each layer is a self-contained, demonstrable s
 - Sidebar sliders (scenario, WACC, terminal growth, growth/margin shifts) re-run the DCF live; built with Plotly; deployable free on Streamlit Community Cloud for a live CV link
 - **Demonstrates:** data visualisation & communicating analysis interactively — core to Analyst / BA roles
 
-## Phase 4 — Pitch deck + investment memo
-- Rebuild the original pitch deck around the new analysis (company overview, business model, financials, valuation bridge, comps, scenarios, risks, recommendation)
-- Add a tight 1–2 page written **investment memo** for a non-technical reader
+## Phase 4 — Pitch deck + investment memo ✅
+- `outputs/NFLX_Investment_Pitch.pptx`: a 12-slide deck — investment summary, company overview, business model, financial trends, valuation approach, scenario football field, comparables, sensitivity, risks/catalysts, recommendation, and a methodology appendix
+- `docs/INVESTMENT_MEMO.md`: a tight 1–2 page written memo (thesis, business, valuation, scenarios, risks, conclusion)
+- Both built from the same engine-exported figures, so the narrative matches the model exactly
 - **Demonstrates:** business communication & storytelling — translating the model into a decision
 
 ## Cross-cutting (optional polish)

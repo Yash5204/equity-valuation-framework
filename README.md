@@ -11,7 +11,7 @@ This repo is built to show the full analyst toolkit in one place rather than a s
 | **Scenario & assumptions** (`config/`) | Bear/Base/Bull, FCF method, cost-of-capital inputs — separated from the actuals | Structured analytical thinking | All analyst roles |
 | **Excel model** (`build_excel_model.py` → `outputs/`) | The same DCF as an auditable, formula-driven workbook with scenarios and sensitivity tables | Excel / IB-standard modelling | Finance / IB |
 | **Dashboard** (`dashboard/app.py`) | Interactive Streamlit app: financial trends, KPIs, peer multiples and a live DCF sensitivity | Data visualisation | Analyst / BA |
-| **Deck + memo** (Phase 4) | The investment story for a non-technical audience | Business communication | Strategy / BA |
+| **Deck + memo** (`outputs/`, `docs/`) | A 12-slide pitch deck and a 1–2 page investment memo for a non-technical audience | Business communication | Strategy / BA |
 
 > **Why "framework, not one stock"?** The thing that reads strongest on a portfolio is *"I built an analysis tool,"* not *"I analysed one company."* Netflix is the worked example; swapping in another company is a config + data change, not a rewrite.
 
@@ -98,6 +98,17 @@ The sidebar sliders (scenario, WACC, terminal growth, growth/margin shifts) re-r
 
 ---
 
+## Pitch deck & investment memo
+
+For the non-technical audience, the analysis is packaged two ways:
+
+- **`outputs/NFLX_Investment_Pitch.pptx`** — a 12-slide pitch deck: investment summary, company overview, business model, financial trends, valuation approach, the scenario football field, comparables, sensitivity, risks/catalysts, and the recommendation.
+- **`docs/INVESTMENT_MEMO.md`** — a tight 1–2 page written memo with the thesis, valuation, scenarios, risks and conclusion.
+
+Both are built from the same figures as everything else, so the story a recruiter reads matches the model they can open.
+
+---
+
 ## Repository structure
 
 ```
@@ -126,15 +137,17 @@ equity-valuation-framework/
 │   └── 01_netflix_walkthrough.md
 ├── outputs/
 │   └── NFLX_DCF_Model.xlsx     # generated Excel model (reconciles with the engine)
+│   └── NFLX_Investment_Pitch.pptx  # 12-slide pitch deck
 └── docs/
-    └── ROADMAP.md              # what each build phase adds
+    ├── ROADMAP.md              # what each build phase adds
+    └── INVESTMENT_MEMO.md      # 1-2 page written investment memo
 ```
 
 ---
 
 ## Roadmap
 
-**Phases 1–3 are built**: the analytical core (Python + SQL), the auditable **Excel model**, and the interactive **Streamlit dashboard**. See [`docs/ROADMAP.md`](docs/ROADMAP.md) for what's left: a rebuilt **pitch deck + investment memo** for the non-technical audience.
+**All four phases are built**: the analytical core (Python + SQL), the auditable **Excel model**, the interactive **Streamlit dashboard**, and the **pitch deck + investment memo** for the non-technical audience. See [`docs/ROADMAP.md`](docs/ROADMAP.md) for how each layer fits together and optional next steps.
 
 ---
 
